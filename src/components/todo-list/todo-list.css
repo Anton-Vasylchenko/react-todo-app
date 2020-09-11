@@ -1,0 +1,11 @@
+.todo-list .list-group-item {
+  padding: .25rem .75rem;
+}
+
+.todo-list-empty {
+  padding: .25rem .75rem;
+  background: white;
+  text-align: center;
+  color: grey;
+  text-transform: uppercase;
+}
