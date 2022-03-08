@@ -5,3 +5,8 @@
 .trash-basket-item-label {
   margin-left: 1rem;
 }
+
+.restore-icon img {
+  object-fit: contain;
+  width: 20px;
+}

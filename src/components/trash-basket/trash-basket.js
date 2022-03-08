@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import TrashBasketItem from '../trash-basket-item';
 
+import trashIcon from '../../assets/images/trash.png'
+
 import './trash-basket.css';
 
 export default class TrashBaster extends Component {
@@ -10,9 +12,9 @@ export default class TrashBaster extends Component {
   };
 
   basketToggle = () => {
-    this.setState(({toggle}) => {
+    this.setState(({ toggle }) => {
       const newToggle = !toggle;
-      return({
+      return ({
         toggle: newToggle
       })
     })
@@ -23,10 +25,10 @@ export default class TrashBaster extends Component {
 
     const msg = 'empty';
 
-    if(trashList.length === 0) {
+    if (trashList.length === 0) {
       return (
         <div className="empty-msg-baket">
-          { msg }
+          {msg}
         </div>
       );
     }
@@ -36,8 +38,8 @@ export default class TrashBaster extends Component {
       return (
         <li key={id} className="list-group-item">
           <TrashBasketItem
-              { ...itemProps }
-              onRestoreItem = { () => onRestoreItem(id) }
+            {...itemProps}
+            onRestoreItem={() => onRestoreItem(id)}
           />
         </li>
       );
@@ -52,25 +54,27 @@ export default class TrashBaster extends Component {
 
     let classNames = 'trash-basket-list'
 
-    if(toggle) {
+    if (toggle) {
       classNames += ' d-none';
     }
 
-    return(
+    return (
       <div className="trash-basket-wrapper">
-          <div className="trash-basket">
-            <span className="trash-count"> { trash } </span>
-            <i className="fa fa-trash-o" onClick={ this.basketToggle }/>
+        <div className="trash-basket">
+          <span className="trash-count"> {trash} </span>
+          <div className="trash-icon" onClick={this.basketToggle} >
+            <img src={trashIcon} alt="trash" />
           </div>
-          <div className={ classNames } >
-            <button
-              className="btn btn-outline-danger basket-clear-btn"
-              onClick = { onClearBasket }
-            >
-              Empty
-            </button>
-            { items }
-          </div>
+        </div>
+        <div className={classNames} >
+          <button
+            className="btn btn-outline-danger basket-clear-btn"
+            onClick={onClearBasket}
+          >
+            Delete all
+          </button>
+          {items}
+        </div>
       </div>
     );
   }

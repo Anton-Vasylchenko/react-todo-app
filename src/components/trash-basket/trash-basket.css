@@ -4,6 +4,11 @@
   margin-top: 20px;
 }
 
+.trash-icon img {
+  object-fit: contain;
+  width: 30px;
+}
+
 .trash-basket {
   position: relative;
   display: inline-block;

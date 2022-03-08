@@ -98,13 +98,11 @@ export default class App extends Component {
         this.setState(({ todoData, trashData }) => {
             const returnIdx = trashData.findIndex((el) => el.id === id);
             const returnItem = { ...trashData[returnIdx] };
-            const idx = returnItem.idx;
             delete returnItem.idx;
 
             const newTodoArray = [
-                ...todoData.slice(0, idx),
-                returnItem,
-                ...todoData.slice(idx)
+                ...todoData,
+                returnItem
             ];
 
             const newTrashData = [

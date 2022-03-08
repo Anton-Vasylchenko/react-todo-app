@@ -1,23 +1,26 @@
 import React from 'react';
 import './trash-basket-item.css';
 
+import restoreIcon from '../../assets/images/restore.png';
 
 const TrashBasketItem = ({ label, onRestoreItem }) => {
-  
+
   return (
     <span className="trash-basket-item">
       <span
-          className="trash-basket-item-label"
-        >
-        { label }
+        className="trash-basket-item-label"
+      >
+        {label}
       </span>
 
-    <button type="button"
+      <button type="button"
         className="btn btn-outline-info btn-sm float-right"
-        onClick={ onRestoreItem }
+        onClick={onRestoreItem}
       >
-        <i className="fas fa-redo-alt"></i>
-    </button>
+        <div className="restore-icon">
+          <img src={restoreIcon} alt="restore" />
+        </div>
+      </button>
 
     </span>
   );
