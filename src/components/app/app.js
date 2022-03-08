@@ -9,8 +9,7 @@ import TrashBasket from '../trash-basket';
 
 import './app.css';
 
-
-export default class App extends Component  {
+export default class App extends Component {
 
     maxId = 100;
 
@@ -35,7 +34,7 @@ export default class App extends Component  {
     }
 
     deleteItem = (id) => {
-        this.setState(({todoData, trashData}) => {
+        this.setState(({ todoData, trashData }) => {
             const idx = todoData.findIndex((el) => el.id === id);
             const delItem = todoData.filter((el) => el.id === id);
 
@@ -52,22 +51,22 @@ export default class App extends Component  {
             ];
 
             return {
-              todoData: newArray,
-              trashData: delArray
+                todoData: newArray,
+                trashData: delArray
             };
         });
     };
 
     addItem = (text) => {
 
-        if(text.length === 0) {
+        if (text.length === 0) {
             return;
         }
 
         const newItem = this.createTodoItem(text);
 
-        this.setState( ({ todoData })  => {
-            const newArray = [ ...todoData, newItem ];
+        this.setState(({ todoData }) => {
+            const newArray = [...todoData, newItem];
             return {
                 todoData: newArray
             };
@@ -88,7 +87,7 @@ export default class App extends Component  {
     }
 
     onToggleImportant = (id) => {
-        this.setState(({todoData}) => {
+        this.setState(({ todoData }) => {
             return {
                 todoData: this.toggleProperty(todoData, id, 'important')
             }
@@ -96,12 +95,12 @@ export default class App extends Component  {
     };
 
     onRestoreItem = (id) => {
-        this.setState(({todoData, trashData}) => {            
+        this.setState(({ todoData, trashData }) => {
             const returnIdx = trashData.findIndex((el) => el.id === id);
             const returnItem = { ...trashData[returnIdx] };
-            const idx = returnItem.idx;            
+            const idx = returnItem.idx;
             delete returnItem.idx;
-            
+
             const newTodoArray = [
                 ...todoData.slice(0, idx),
                 returnItem,
@@ -110,7 +109,7 @@ export default class App extends Component  {
 
             const newTrashData = [
                 ...trashData.slice(0, returnIdx),
-                ...trashData.slice(returnIdx+1)
+                ...trashData.slice(returnIdx + 1)
             ];
 
             return {
@@ -122,7 +121,7 @@ export default class App extends Component  {
     };
 
     onClearBasket = () => {
-        this.setState(({trashData}) => {
+        this.setState(({ trashData }) => {
             return {
                 trashData: []
             }
@@ -130,7 +129,7 @@ export default class App extends Component  {
     }
 
     onToggleDone = (id) => {
-        this.setState(({todoData}) => {
+        this.setState(({ todoData }) => {
             return {
                 todoData: this.toggleProperty(todoData, id, 'done')
             }
@@ -146,7 +145,7 @@ export default class App extends Component  {
     }
 
     search(items, term) {
-        if(term.length === 0) {
+        if (term.length === 0) {
             return items;
         }
 
@@ -157,7 +156,7 @@ export default class App extends Component  {
 
 
     filter(items, filter) {
-        switch(filter) {
+        switch (filter) {
             case 'all':
                 return items;
             case 'active':
@@ -180,10 +179,10 @@ export default class App extends Component  {
 
         return (
             <div className="todo-app">
-                <AppHeader toDo={ todoCount } done={ doneCount } />
+                <AppHeader toDo={todoCount} done={doneCount} />
                 <div className="top-panel d-flex">
                     <SearchPanel
-                        onSearchChange={ this.onSearchChange }
+                        onSearchChange={this.onSearchChange}
                     />
                     <ItemStatusFilter
                         filter={filter}
@@ -193,18 +192,18 @@ export default class App extends Component  {
 
                 <TodoList
                     todos={visibleItems}
-                    onDeleted={ this.deleteItem }
+                    onDeleted={this.deleteItem}
                     onToggleImportant={this.onToggleImportant}
                     onToggleDone={this.onToggleDone}
                     filter={filter}
                 />
 
-                <AddItem onItemAdded={ this.addItem }/>
+                <AddItem onItemAdded={this.addItem} />
                 <TrashBasket
-                    trash = { trashCount }
-                    trashList = { trashData }       
-                    onRestoreItem = { this.onRestoreItem }    
-                    onClearBasket = { this.onClearBasket }         
+                    trash={trashCount}
+                    trashList={trashData}
+                    onRestoreItem={this.onRestoreItem}
+                    onClearBasket={this.onClearBasket}
                 />
             </div>
         );
